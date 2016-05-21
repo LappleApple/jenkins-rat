@@ -20,4 +20,4 @@ JSON=$(echo "{}" | jq ".timestamp=\"$DATE\"" \
     | jq ".env_vars=\"$ENV_VARS\"" \
     | jq ".jenkins_url=\"$JENKINS_URL\"")
 
-echo "$JSON"
+./send-hipchat-notification.sh "$JSON"
