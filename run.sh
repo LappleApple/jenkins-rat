@@ -10,6 +10,7 @@ OAUTH_PLUGIN_VERSION=$(./extract-from-manifest.sh "$PLUGINS_DIR/openam-oauth.jpi
 KRAKEN_PLUGIN_VERSION=$(./extract-from-manifest.sh "$PLUGINS_DIR/cloud-kraken-plugin.jpi" Implementation-Version)
 ENV_VARS=$(env | grep -E "^OAUTH2_ACCESS_TOKEN_URL=")
 JENKINS_URL=${HUDSON_URL:-}
+set -e
 
 DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
