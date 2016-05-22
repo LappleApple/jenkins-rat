@@ -4,7 +4,6 @@ IFS=$'\t\n'
 
 @test "Can extract from manifest if there are no spaces after :" {
     run ./extract-from-manifest.sh test/test.jar Version-Foo
-    echo 0.1.2$output >tmp
     [ "$output" = "0.1.2" ]
 }
 
