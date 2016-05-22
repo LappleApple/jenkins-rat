@@ -6,10 +6,8 @@ IFS=$'\t\n'
 PLUGINS_DIR="${JENKINS_HOME}/plugins/"
 
 set +e
-files=($PLUGINS_DIR/openam-oauth.*pi)
-OAUTH_PLUGIN_VERSION=$(./extract-from-manifest.sh "$files" Implementation-Version)
-files=($PLUGINS_DIR/cloud-kraken-plugin.*pi)
-KRAKEN_PLUGIN_VERSION=$(./extract-from-manifest.sh "$files" Implementation-Version)
+OAUTH_PLUGIN_VERSION=$(./get-plugin-version.sh openam-oauth)
+KRAKEN_PLUGIN_VERSION=$(./get-plugin-version.sh cloud-kraken-plugin)
 ENV_VARS=$(env | grep -E "^OAUTH2_ACCESS_TOKEN_URL=")
 JENKINS_URL=${HUDSON_URL:-}
 set -e
