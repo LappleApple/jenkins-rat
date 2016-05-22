@@ -6,7 +6,7 @@ IFS=$'\t\n'
 PLUGIN_NAME=$1
 
 list-files() {
-    find $1 -name "$2" -type f -depth 1
+    find $1 -maxdepth 1 -name "$2" -type f
 }
 
 format-version-from-file() {
