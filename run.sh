@@ -22,4 +22,10 @@ JSON=$(echo "{}" | jq ".timestamp=\"$DATE\"" \
     | jq ".env_vars=\"$ENV_VARS\"" \
     | jq ".jenkins_url=\"$JENKINS_URL\"")
 
-./send-hipchat-notification.sh "$JSON" "$JENKINS_URL"
+FROM="$JENKINS_URL"
+if [[ $FROM =~ ^[^/]+//([^\.]+)\. ]]; then
+    FROM="${BASH_REMATCH[1]}"
+fi
+FROM=$(echo "$FROM" | cut -c 1-25)
+
+./send-hipchat-notification.sh "$JSON" "$FROM"
