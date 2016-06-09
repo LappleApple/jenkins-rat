@@ -11,6 +11,7 @@ KRAKEN_PLUGIN_VERSION=$(./get-plugin-version.sh cloud-kraken-plugin)
 ENV_VARS=$(env | grep -E "^OAUTH2_ACCESS_TOKEN_URL=")
 JENKINS_URL=${HUDSON_URL:-}
 JENKINS_VERSION=${JENKINS_VERSION:-}
+MASTER_IMAGE=$(./get-docker-container-image.sh taupageapp)
 set -e
 
 DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -19,6 +20,7 @@ JSON=$(echo "{}" | jq ".timestamp=\"$DATE\"" \
     | jq ".oauth2_plugin_version=\"$OAUTH_PLUGIN_VERSION\"" \
     | jq ".kraken_plugin_version=\"$KRAKEN_PLUGIN_VERSION\"" \
     | jq ".env_vars=\"$ENV_VARS\"" \
+    | jq ".master_image=\"$MASTER_IMAGE\"" \
     | jq ".jenkins_version=\"$JENKINS_VERSION\"" \
     | jq ".jenkins_url=\"$JENKINS_URL\"")
 
