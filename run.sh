@@ -32,4 +32,15 @@ if [[ $FROM =~ ^[^/]+//([^\.]+)\. ]]; then
 fi
 FROM=$(echo "$FROM" | cut -c 1-25)
 
-./send-hipchat-notification.sh "$JSON" "$FROM"
+INODE_USE_LEVEL=3
+if [ $INODE_USE -gt 40 ]; then INODE_USE_LEVEL=2; fi
+if [ $INODE_USE -gt 60 ]; then INODE_USE_LEVEL=1; fi
+if [ $INODE_USE -gt 80 ]; then INODE_USE_LEVEL=0; fi
+
+LEVELS=($INODE_USE_LEVEL)
+echo ${LEVELS[@]}
+MIN_LEVEL=$(IFS=$'\n' printf '%s\n' "${LEVELS[@]}" | sort -n | head -n1)
+
+COLORS=(red yellow gray green)
+
+./send-hipchat-notification.sh "$JSON" "$FROM" ${COLORS[$MIN_LEVEL]}
