@@ -12,7 +12,7 @@ ENV_VARS=$(env | grep -E "^OAUTH2_ACCESS_TOKEN_URL=")
 JENKINS_URL=${HUDSON_URL:-}
 JENKINS_VERSION=${JENKINS_VERSION:-}
 MASTER_IMAGE=$(./get-docker-container-image.sh taupageapp)
-INODE_USE=$(df -i | grep "^none" | awk '{print $5}' | sed -E 's/%//')
+INODE_USE=$(df -i | grep "^/dev/xvdf" | awk '{print $5}' | sed -E 's/%//')
 set -e
 
 DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
