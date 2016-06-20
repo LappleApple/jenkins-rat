@@ -12,6 +12,7 @@ ENV_VARS=$(env | grep -E "^OAUTH2_ACCESS_TOKEN_URL=")
 JENKINS_URL=${HUDSON_URL:-}
 JENKINS_VERSION=${JENKINS_VERSION:-}
 MASTER_IMAGE=$(./get-docker-container-image.sh taupageapp)
+INODE_USE=$(df -i | grep "^none" | awk '{print $5}' | sed -E 's/%//')
 set -e
 
 DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -22,6 +23,7 @@ JSON=$(echo "{}" | jq ".timestamp=\"$DATE\"" \
     | jq ".env_vars=\"$ENV_VARS\"" \
     | jq ".master_image=\"$MASTER_IMAGE\"" \
     | jq ".jenkins_version=\"$JENKINS_VERSION\"" \
+    | jq ".inode_use=\"$INODE_USE\"" \
     | jq ".jenkins_url=\"$JENKINS_URL\"")
 
 FROM="$JENKINS_URL"
