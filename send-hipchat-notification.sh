@@ -4,7 +4,7 @@ IFS=$'\t\n'
 
 MESSAGE="$1"
 TITLE="${2:-}"
-COLOR="${3:-gray}"
+COLOR="${3:-purple}"
 
 curl -f -s -XPOST $RAT_HIPCHAT_URL/v2/room/$RAT_HIPCHAT_ROOM/notification?auth_token=$RAT_HIPCHAT_TOKEN \
-    -d "message=$MESSAGE&from=$TITLE"
+    -d "message=$MESSAGE&from=$TITLE&color=$COLOR"
