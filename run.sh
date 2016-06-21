@@ -44,3 +44,5 @@ MIN_LEVEL=$(IFS=$'\n' printf '%s\n' "${LEVELS[@]}" | sort -n | head -n1)
 COLORS=(red yellow gray green)
 
 ./send-hipchat-notification.sh "$JSON" "$FROM" ${COLORS[$MIN_LEVEL]}
+
+echo "$JSON"
